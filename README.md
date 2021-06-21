@@ -1,6 +1,8 @@
 # procontacto
 Examén de Introducción
 
+EJERCICIO 2
+
 Las siguientes preguntas están orientadas a la comprensión del protocolo HTTP. Son agnósticas al lenguaje de programación, la idea es comprender los conceptos del estándar:
 1.	¿Qué es un servidor HTTP? 
 Es una aplicación que procesa peticiones en un servidor creando una comunicación bidireccional, que puede ser asíncrona o síncrona, generando una respuesta que se envía al cliente bajo el protocolo de hipertexto. El servidor puede generar estas respuestas en algún lenguaje de programación.
@@ -61,3 +63,20 @@ REST es un conjunto de principios arquitectónicos que se ajusta a las necesidad
 11.	¿Qué son los headers en un request? ¿Para qué se utiliza el key Content-type en un header?
 Los header se usan para enviar información entre el cliente y servidor adicional al contenido solicitado o enviado. Una cabecera esta compuesta por su nombre, seguida de dos puntos y su valor.
 La cabecera Content-type es usada para definir el tipo de contenido que se sera devuelto al cliente. Un ejemplo puede ser text/html; charset=utf-8
+
+EJERCICIO 3
+Recomendamos previamente entender los conceptos de la sintaxis “json” antes de arrancar con los ejercicios.
+Descargar el POSTMAN (aplicación para realizar request como cliente), adjuntando un screen de resolución para cada ítem:
+
+1.	Realizar un request GET a la URL: https://procontacto-reclutamiento-default-rtdb.firebaseio.com/contacts.json
+2.	Realizar un request POST a la URL anterior, y con body:
+{
+"name":"Tu nombre",
+"email":tunombre.tuapellido@procontacto.com.mx
+}
+Tip: (Marcar la opción “raw” como body)
+3.	Realizar nuevamente un request GET a la URL: https://procontacto-reclutamiento-default-rtdb.firebaseio.com/contacts.json
+¿Qué diferencias se observan entre las llamadas el punto 1 y 3?
+En el punto 1 se envío la petición sin parametros y devolvío un JSON con varios datos de contactos. Devolvió un estatus 200.
+El el punto 3, en la URL se envian parámetros en la URL, y devolvío un JSON con varios datos de contactos. Devolvió un estatus 200.
+El punto 2 devolvió un JSON con error: No data supplied. Y un estatus 400.
