@@ -80,3 +80,68 @@ Tip: (Marcar la opción “raw” como body)
 En el punto 1 se envío la petición sin parametros y devolvío un JSON con varios datos de contactos. Devolvió un estatus 200.
 El el punto 3, en la URL se envian parámetros en la URL, y devolvío un JSON con varios datos de contactos. Devolvió un estatus 200.
 El punto 2 devolvió un JSON con error: No data supplied. Y un estatus 400.
+
+EJERCICIO 6
+
+trigger consultaEmailTrigger on Contact (after insert, after update) {
+	if(system.isFuture()) return;
+    if (Trigger.isInsert) {
+		String jsonString = json.serialize(Trigger.NEW);
+        consultaWSSPro.consultaJSON(jsonString);
+    }else if (Trigger.isUpdate) {
+        String jsonString = json.serialize(Trigger.old);
+        consultaWSSPro.consultaJSON2(jsonString);
+    }
+}
+
+public class consultaWSSPro {
+    
+    @future(callout=true)
+    public static void consultaJSON(String jsonString){
+        System.debug('On Insert');
+        System.debug(jsonString);
+       	List<Contact> accountList = (List<Contact>)Json.deserialize(jsonString,List<Contact>.class);
+        for(Contact c: accountList){
+        	Http http = new Http();
+        	HttpRequest request = new HttpRequest();
+	        request.setEndpoint('https://procontacto-reclutamiento-default-rtdb.firebaseio.com/contacts.json');
+    	    request.setMethod('GET');
+        	HttpResponse response = http.send(request);
+	        // If the request is successful, parse the JSON response.
+    	    if (response.getStatusCode() == 200) {
+        	    // Deserializes the JSON string into collections of primitive data types.
+            	Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
+				Map<String,Object> data = (Map<String,Object>)results.get(c.idprocontacto__c);
+				for (String fieldName : data.keySet()){
+        	    	System.debug('field name is ' + fieldName + '=>' + data.get(fieldName));
+            	}
+                c.Email= (String)data.get('email');
+            	update c;
+	    	}
+    	}
+    }
+    
+    @future(callout=true)
+    public static void consultaJSON2(String jsonString){
+        System.debug('On Update');
+       	List<Contact> accountList = (List<Contact>)Json.deserialize(jsonString,List<Contact>.class);
+        for(Contact c: accountList){
+        Http http = new Http();
+        	HttpRequest request = new HttpRequest();
+	        request.setEndpoint('https://procontacto-reclutamiento-default-rtdb.firebaseio.com/contacts.json');
+    	    request.setMethod('GET');
+        	HttpResponse response = http.send(request);
+	        // If the request is successful, parse the JSON response.
+    	    if (response.getStatusCode() == 200) {
+        	    // Deserializes the JSON string into collections of primitive data types.
+            	Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
+				Map<String,Object> data = (Map<String,Object>)results.get(c.idprocontacto__c);
+				for (String fieldName : data.keySet()){
+        	    	System.debug('field name is ' + fieldName + '=>' + data.get(fieldName));
+            	}
+                c.Email= (String)data.get('email');
+            	update c;
+	    	}
+        }
+    }
+}
