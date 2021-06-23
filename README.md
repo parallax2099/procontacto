@@ -1,6 +1,13 @@
 # procontacto
 Examén de Introducción
 
+EJERCICIO 1
+
+https://github.com/parallax2099/procontacto/blob/main/instalacion%20GIT.png
+
+https://github.com/parallax2099/procontacto/blob/main/instalacion%20VSC.png
+
+
 EJERCICIO 2
 
 Las siguientes preguntas están orientadas a la comprensión del protocolo HTTP. Son agnósticas al lenguaje de programación, la idea es comprender los conceptos del estándar:
@@ -80,6 +87,32 @@ Tip: (Marcar la opción “raw” como body)
 En el punto 1 se envío la petición sin parametros y devolvío un JSON con varios datos de contactos. Devolvió un estatus 200.
 El el punto 3, en la URL se envian parámetros en la URL, y devolvío un JSON con varios datos de contactos. Devolvió un estatus 200.
 El punto 2 devolvió un JSON con error: No data supplied. Y un estatus 400.
+
+EJERCICIO 4
+
+Link de perfil 
+
+https://trailblazer.me/id/humedina
+
+
+
+EJERCICIO 5![image](https://github.com/parallax2099/procontacto/blob/main/diagrama.jpg)
+1.	Lead. cliente potencial que demostró interés en un producto o servicio ofrecido por la marca a través de la interacción con contenidos y otros materiales
+
+
+2.	Account. Representa una cuenta individual, que puede ser una organización o persona involucrada con el negocio (como clientes, competidores y socios).
+
+3.	Contact. Representa un contacto, que es una persona asociada a una cuenta.
+
+4.	Opportunity. Representa una oportunidad, que es una venta o un trato pendiente.
+5.	Product. Representa un producto que vende las empresas.
+6.	PriceBook. Representa una lista de precios que contiene la lista de productos que venden las empresas.
+7.	Quote. Representa una cotización, que es un registro que muestra los precios propuestos para productos y servicios.
+8.	Asset. Representa un artículo de valor comercial, como un producto vendido por la empresa o un competidor, que un cliente ha comprado e instalado.
+9.	Case. Representa un caso, problema del cliente.
+
+La descripción de cada campo de los objetos de arriba los consulte en la liga: https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_concepts.htm
+
 
 EJERCICIO 6
 
